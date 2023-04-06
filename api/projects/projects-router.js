@@ -24,7 +24,7 @@ router.get(
   }
 );
 
-router.post("/", mw.projeIsmiVarmi, async (req, res, next) => {
+router.post("/", mw.projeIsmiVarmi,mw.bosGonderimVarmi, async (req, res, next) => {
   try {
     const newProject=await Projects.create(req.body)
     res.status(201).json(newProject);
@@ -43,7 +43,7 @@ router.delete("/:id",  mw.idGecerlimi,async (req, res, next) => {
     }
   });
 
-  router.put("/:id",  mw.idGecerlimi,async (req, res, next) => {
+  router.put("/:id",  mw.idGecerlimi,mw.bosGonderimVarmi,async (req, res, next) => {
     try {
      await Projects.updates(req.params.id,req.body)
      const updatedProject=await Projects.getById(req.params.id)

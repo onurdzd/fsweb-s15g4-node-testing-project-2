@@ -35,6 +35,21 @@ const idGecerlimi=async(req,res,next)=>{
     }
 }
 
+const bosGonderimVarmi=(req,res,next)=>{
+    try {
+        if(!req.body.name || !req.body.description){
+            next({
+                status:400,
+                message:"Eksik bilgi gönderdin"
+            })
+        }else{
+            next()
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
 const projeIsmiVarmi=async(req,res,next)=>{
     try {
         const project=await Projects.getByName(req.body.name)
@@ -51,4 +66,4 @@ const projeIsmiVarmi=async(req,res,next)=>{
     }
 }
 
-module.exports={datadaProjeVarmi,idGecerlimi,projeIsmiVarmi}
+module.exports={datadaProjeVarmi,idGecerlimi,projeIsmiVarmi,bosGonderimVarmi}
