@@ -22,4 +22,8 @@ const remove=(project_id)=>{
     return db("projects").where("project_id",project_id).del(project_id)
 }
 
-module.exports={get,getById,getByName,create,remove}
+const updates=(project_id,project)=>{
+    return db("projects").where("project_id",project_id).first().update(project)
+}
+
+module.exports={get,getById,getByName,create,remove,updates}

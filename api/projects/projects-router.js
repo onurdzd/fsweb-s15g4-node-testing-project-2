@@ -33,7 +33,7 @@ router.post("/", mw.projeIsmiVarmi, async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id",  mw.idGecerlimi,async (req, res, next) => {
     try {
       const deletedProject=await Projects.getById(req.params.id)
       await Projects.remove(req.params.id)
@@ -42,5 +42,15 @@ router.delete("/:id", async (req, res, next) => {
       next(error);
     }
   });
+
+  router.put("/:id",  mw.idGecerlimi,async (req, res, next) => {
+    try {
+     await Projects.updates(req.params.id,req.body)
+     const updatedProject=await Projects.getById(req.params.id)
+    res.status(201).json(updatedProject);
+    } catch (error) {
+      next(error);
+    }
+  });  
 
 module.exports = router;

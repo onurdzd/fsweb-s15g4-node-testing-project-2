@@ -48,7 +48,6 @@ describe("--------create-------",()=>{
     })
 })
 
-
 describe("--------delete-------",()=>{
     let project;
     beforeEach(async ()=> {
@@ -57,6 +56,18 @@ describe("--------delete-------",()=>{
     })
     test("[4] id si verilen projeyi siliyor",()=>{
         expect(project).not.toBeDefined()
+    })
+})
+
+describe("--------update-------",()=>{
+    let project;
+    beforeEach(async ()=> {
+        await Projects.updates(1,newProject)
+        project=await Projects.getById(1)
+    })
+    test("[5] ilgili id li projeyi verilen yeni projeyle güncelliyor",()=>{
+        expect(project).toBeDefined()
+        expect(project).toMatchObject(newProject)
     })
 })
 
