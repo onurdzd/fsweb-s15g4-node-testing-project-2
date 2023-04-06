@@ -4,4 +4,18 @@ const get =() =>{
     return db("projects")
 }
 
-module.exports={get}
+const getById =(project_id) =>{
+    return db("projects").where("project_id",project_id).first()
+}
+
+const getByName=(project_name)=>{
+    return db("projects").where("name",project_name).first()
+}
+
+const create =async (project) =>{
+    const newProjectId= await db("projects").insert(project)
+    const newProject=await getById(newProjectId[0])
+    return newProject
+}
+
+module.exports={get,getById,getByName,create}
