@@ -33,4 +33,14 @@ router.post("/", mw.projeIsmiVarmi, async (req, res, next) => {
   }
 });
 
+router.delete("/:id", async (req, res, next) => {
+    try {
+      const deletedProject=await Projects.getById(req.params.id)
+      await Projects.remove(req.params.id)
+      res.status(201).json({message:`${deletedProject.project_id} id nolu proje silindi`});
+    } catch (error) {
+      next(error);
+    }
+  });
+
 module.exports = router;

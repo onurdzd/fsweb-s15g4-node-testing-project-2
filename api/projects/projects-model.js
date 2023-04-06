@@ -18,4 +18,8 @@ const create =async (project) =>{
     return newProject
 }
 
-module.exports={get,getById,getByName,create}
+const remove=(project_id)=>{
+    return db("projects").where("project_id",project_id).del(project_id)
+}
+
+module.exports={get,getById,getByName,create,remove}
