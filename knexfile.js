@@ -27,7 +27,7 @@ module.exports = {
 
   development: {
     ...sharedConfig,
-    connection: { filename: './data/auth.db3' },
+    connection: { filename: './data/data.db3' },
   },
   testing: {
     ...sharedConfig,
